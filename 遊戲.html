@@ -1,0 +1,130 @@
+<HTML>
+<HEAD>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遠誠人力_2025運勢預測</title>
+    <style>
+        /* 基本樣式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            font-size: 36px;
+        }
+
+        /* 抽籤頁面 */
+        .draw-page {
+            margin-top: 100px;
+        }
+        .draw-button {
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+        }
+        .draw-button:hover {
+            transform: scale(1.1);
+        }
+        .draw-button img {
+            width: 540px;
+            height: 960px;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 結果頁面 */
+        .result-page {
+            margin-top: 50px;
+        }
+        .result-image {
+            width: 540px;
+            height: 960px;
+            margin-top: 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        .result-image:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<!-- 抽籤頁面 -->
+<div id="drawPage" class="draw-page">
+    <div class="draw-button">
+        <img src="
+https://drive.google.com/thumbnail?id=1F4zjOJZ-AIpnGOEMUV1q0IqEJpARL_FA&sz=w960" alt="立即抽籤" id="drawBtn">
+    </div>
+</div>
+
+<!-- 結果頁面 -->
+<div id="resultPage" class="result-page" style="display: none;">
+       <img id="resultImage" class="result-image" src="" alt="抽籤結果圖片">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+ <!-- 分享按鈕 -->
+    <div class="social-buttons">
+    <a href="" id="facebookShare" class="facebook-btn" target="_blank">分享至 Facebook</a>
+<br>
+    <a href="" id="lineShare" class="line-btn" target="_blank">分享至 Line</a>
+    </div>
+</div>
+
+<script>
+    const drawPage = document.getElementById("drawPage");
+    const resultPage = document.getElementById("resultPage");
+    const drawBtn = document.getElementById("drawBtn");
+    const resultImage = document.getElementById("resultImage");
+
+    // 隨機結果圖片
+    const results = [
+        { image: "https://drive.google.com/thumbnail?id=1y0AsdY9OzK069Y1T_RRGOIVPIkZ20mmF&sz=w960", message: "健康運特大吉！" },
+        { image: "https://drive.google.com/thumbnail?id=1QDavbcR-tkoyEiLOW3HMVVnvp-9T9kWk&sz=w960", message: "健康運大吉！" },
+        { image: "https://drive.google.com/thumbnail?id=13sbYMxHVWtHYQIv_8O_RvOCtq2qlRYKs&sz=w960", message: "健康運中吉！" },
+        { image: "https://drive.google.com/thumbnail?id=1UW88shWDITe1vaM1gzBUmk0R2M1xA9pQ&sz=w960", message: "健康運小吉！" },
+        { image: "https://drive.google.com/thumbnail?id=1vrrUctAPOwcayW-zXTSriXlAt-re8TxG&sz=w960", message: "愛情運特大吉！" },
+        { image: "https://drive.google.com/thumbnail?id=12qaEXonefdyVO1-FJ9JdJtnUte1ZXLE3&sz=w960", message: "愛情運大吉！" },
+        { image: "https://drive.google.com/thumbnail?id=140NcTKoyggVwEkpi11UJtZ6D289nTPat&sz=w960", message: "愛情運中吉！" },
+        { image: "https://drive.google.com/thumbnail?id=1R2ktVlX2PxHZCc2asVL91NiqjDK2sAbi&sz=w960", message: "愛情運小吉！" },
+        { image: "https://drive.google.com/thumbnail?id=1uChX3XAYlBdUMRY-kqDRq0ZgiK-35iSy&sz=w960", message: "事業運特大吉！" },
+        { image: "https://drive.google.com/thumbnail?id=1FCrGZr79BADTU6xzkGO4ON070cpc7B0S&sz=w960", message: "事業運大吉！" },
+        { image: "https://drive.google.com/thumbnail?id=11HX1zr7wpHualJ_OLqWVlVOCtTH0sdAZ&sz=w960", message: "事業運中吉！" },
+        { image: "https://drive.google.com/thumbnail?id=1QvCOm-Kl-aC7AyNUDEb0Jv0a-ob2IksQ&sz=w960", message: "事業運小吉！" },
+        { image: "https://drive.google.com/thumbnail?id=1JQ5IjpI4Jj4ohyXtA0j0Gewa1-VqYZjU&sz=w960", message: "財富運特大吉！" },
+        { image: "https://drive.google.com/thumbnail?id=1gO5NQmFhb-tVmJFt8kh92CB2bwMqdpxt&sz=w960", message: "財富運大吉！" },
+        { image: "https://drive.google.com/thumbnail?id=1jifdEGXvsdqvvuldLwRQsEvQMX0GPjqM&sz=w960", message: "財富運中吉！" },
+        { image: "https://drive.google.com/thumbnail?id=1b1T_1m_JOvt5t5f5Sk_Y50GsHtvldD_F&sz=w960", message: "財富運小吉！" },
+        ];
+
+   // 點擊抽籤圖片，顯示結果頁面
+    drawBtn.addEventListener("click", () => {
+        drawPage.style.display = "none";
+        resultPage.style.display = "block";
+
+        const randomResult = results[Math.floor(Math.random() * results.length)];
+        resultImage.src = randomResult.image;
+        resultImage.alt = randomResult.message;
+
+        // 設置 Facebook 和 Line 分享按鈕的 URL
+        const shareUrl = encodeURIComponent(resultImage.src); // 用圖片 URL 作為分享內容
+        const currentPageUrl = encodeURIComponent(window.location.href); // 當前頁面 URL
+
+        // 設置 Facebook 分享
+        document.getElementById("facebookShare").href = `https://www.facebook.com/sharer/sharer.php?u=${currentPageUrl}`;
+
+        // 設置 Line 分享
+        document.getElementById("lineShare").href = `https://social-plugins.line.me/lineit/share?url=${currentPageUrl}`;
+    });
+</script>
+
+</body>
+</HTML>
